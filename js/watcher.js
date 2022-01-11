@@ -1,9 +1,14 @@
+/*
+ * @Author: zhy
+ * @Date: 2022-01-11 11:17:27
+ * @Description: 
+ * @LastEditTime: 2022-01-11 11:54:25
+ */
 function Watcher(vm, expOrFn, cb) {
     this.cb = cb;
     this.vm = vm;
     this.expOrFn = expOrFn;
-    this.depIds = {};
-
+    this.depIds = {}
     if (typeof expOrFn === 'function') {
         this.getter = expOrFn;
     } else {
