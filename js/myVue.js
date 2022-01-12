@@ -2,7 +2,7 @@
  * @Author: zhy
  * @Date: 2022-01-11 11:17:27
  * @Description: 
- * @LastEditTime: 2022-01-11 12:08:23
+ * @LastEditTime: 2022-01-12 12:35:52
  */
 class MyVue {
     constructor(options) {
@@ -14,30 +14,30 @@ class MyVue {
             this._proxyData(key);
         });
         this._initComputed();
-        observe(data, this);
+        new Observer(data, this);
         this.$compile = new Compile(options.el || document.body, this)
         this._watch();
     }
     _proxyData(key, setter, getter) {
-        const me = this;
+        const _this = this;
         setter = setter ||
-        Object.defineProperty(me, key, {
+        Object.defineProperty(_this, key, {
             configurable: false,
             enumerable: true,
             get() {
-                return me._data[key];
+                return _this._data[key];
             },
             set(newVal) {
-                me._data[key] = newVal;
+                _this._data[key] = newVal;
             }
         });
     }
     _initComputed() {
-        const me = this;
+        const _this = this;
         const computed = this.$options.computed;
         if (typeof computed === 'object') {
             Object.keys(computed).forEach(function(key) {
-                Object.defineProperty(me, key, {
+                Object.defineProperty(_this, key, {
                     get: typeof computed[key] === 'function'
                             ? computed[key]
                             : computed[key].get,

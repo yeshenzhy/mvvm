@@ -2,7 +2,7 @@
  * @Author: zhy
  * @Date: 2022-01-11 11:17:27
  * @Description: 
- * @LastEditTime: 2022-01-11 12:00:36
+ * @LastEditTime: 2022-01-12 12:37:21
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -19,10 +19,11 @@
         {{someStr}}
         <span v-text="child.someStr"></span>
     </p>
-    <p>{{ getHelloWord }}</p>
+    <p class="a">{{ getHelloWord }}</p>
     <p v-html="htmlStr"></p>
     <button v-on:click="clickBtn">change model</button>
 </div>
+
 <script src="./js/observer.js"></script>
 <script src="./js/watcher.js"></script>
 <script src="./js/compile.js"></script>
@@ -39,13 +40,13 @@
             }
         },
         computed: {
-            getHelloWord: function() {
+            getHelloWord: function () {
                 return this.someStr + this.child.someStr;
             }
         },
         watch: {
             "child.someStr": (val,oldVal) => {
-                console.log(oldVal,val);
+                console.log(this,oldVal,val);
             }
         },
         methods: {
