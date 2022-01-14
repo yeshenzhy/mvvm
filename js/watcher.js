@@ -2,7 +2,7 @@
  * @Author: zhy
  * @Date: 2022-01-11 11:17:27
  * @Description: 
- * @LastEditTime: 2022-01-11 11:54:25
+ * @LastEditTime: 2022-01-14 12:29:55
  */
 function Watcher(vm, expOrFn, cb) {
     this.cb = cb;
@@ -46,6 +46,7 @@ Watcher.prototype = {
         // 这一步是在 this.get() --> this.getVMVal() 里面完成，forEach时会从父级开始取值，间接调用了它的getter
         // 触发了addDep(), 在整个forEach过程，当前wacher都会加入到每个父级过程属性的dep
         // 例如：当前watcher的是'child.child.name', 那么child, child.child, child.child.name这三个属性的dep都会加入当前watcher
+        // 这里的dep是每个Dep实例
         if (!this.depIds.hasOwnProperty(dep.id)) {
             dep.addSub(this);
             this.depIds[dep.id] = dep;
