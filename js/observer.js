@@ -2,7 +2,7 @@
  * @Author: zhy
  * @Date: 2022-01-11 11:17:27
  * @Description: 
- * @LastEditTime: 2022-01-14 12:30:37
+ * @LastEditTime: 2022-01-19 15:02:54
  */
 
 class Observer {
@@ -24,7 +24,6 @@ class Observer {
             configurable: false, // 不能再define
             get() {
                 if (Dep.target) {
-                    console.log(Dep.target,44);
                     dep.depend();
                 }
                 return val;
@@ -69,7 +68,6 @@ class Dep {
     }
     notify() {
         // 这里的sub是每个watcher实例
-        console.log(this.subs,333);
         this.subs.forEach((sub) => {
             sub.update();
         });
